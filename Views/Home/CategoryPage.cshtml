@@ -1,0 +1,31 @@
+@model Products_and_Catagories.Models.Association
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Page</title>
+</head>
+<body>
+    <h1>@ViewBag.ThisCategory.Name</h1>
+    <h1><a href="/categories">Back</a></h1>
+    <h2>Products in this Category:</h2>
+    <ul>
+        @foreach(var each in ViewBag.thisCategoriesProduct)
+        {
+            <li>@each.Name</li>
+        }
+    </ul>
+    <form asp-controller="Home" asp-action="NewAssociationByCategory" method="POST" asp-route-CategoryId ="@ViewBag.ThisCategory.CategoryId">
+        <select asp-for="ProductId">
+            @foreach(var each in ViewBag.NotInProducts)
+            {
+                <option value = "@each.ProductId">@each.Name</option>
+            }
+        </select>
+        <br>
+        <input type="submit" value="Add"/>
+    </form>
+
+</body>
+</html>
